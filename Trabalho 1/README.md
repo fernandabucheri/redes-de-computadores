@@ -37,7 +37,7 @@ As redes em roxo são redes de núcleo. Já a rede em verde é uma rede domésti
 
 ## Sobre gargalos 
 
-Posteriormente, utilizando a topologia implementada, foram realizados testes de acordo com o solicitado. Os possíveis gargalos ocorrem nos provedores de internet respeitando os menores valores de banda. 
+Foram realizados testes na topologia implementada. Os possíveis gargalos ocorrem nos provedores de internet respeitando os menores valores de banda. 
 
 <br>
 
@@ -51,7 +51,7 @@ Existem basicamente quatro tipos de atrasos que podem ocorrer a cada salto que o
 
 No núcleo da rede a comunicação entre os roteadores costuma ser bem rápida já que os links contratados geralmente são de alta velocidade e o meio física costuma utilizar uma tecnologia avançada. Já os clientes e servidores podem ter links de comunicação mais lentos, dependendo da taxa de transmissão que foi contratada dos provedores de acesso e da tecnologia utilizada no meio físico. 
 
-Portanto conclui-se que todos os quatro tipos de atrasos citados estão propensos a acontecer na topologia elaborada, sendo que os atrasos de transmissão e de propagação tem mais chances de ocorrer na comunicação entre os clientes residenciais com o núcleo da rede e na comunicação entre o núcleo da rede com os servidores na rede institucional.
+Portanto conclui-se que todos os quatro tipos de atrasos citados estão propensos a acontecer na topologia elaborada, sendo que os atrasos de transmissão e de propagação tem mais chances de ocorrer na comunicação entre os clientes residenciais e o núcleo da rede e na comunicação entre o núcleo da rede e os servidores na rede institucional.
 
 <br>
 
