@@ -1,7 +1,5 @@
 # Roteamento OSPF
 
-O trabalho 3 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%203/trabalho_3_roteamento.pdf).
-
 ## Topologia 
 
 ![topologia](topologia.png)
@@ -75,3 +73,9 @@ ser instalados (na máquina real), dê o comando no terminal:
 ```
 $ sudo apt-get install <nome_pacote>
 ```
+
+<br>
+
+## Referências
+
+* Texto escrito com base na descrição do trabalho (disponível [aqui](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%203/trabalho_3_roteamento.pdf)).

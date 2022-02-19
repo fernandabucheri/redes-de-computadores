@@ -1,7 +1,5 @@
 # Atraso, Vazão/Gargalos, Perdas
 
-O trabalho 1 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%201/trab_1_2021.pdf).
-
 O objetivo deste trabalho foi implementar uma rede no emulador _CORE_.
 
 ## Contextualização
@@ -117,3 +115,9 @@ Parâmetros importantes:
 ```
 # traceroute <ip_maquina_destino>
 ```
+
+<br>
+
+## Referências
+
+* Texto escrito com base na descrição do trabalho (disponível [aqui](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%201/trab_1_2021.pdf)).

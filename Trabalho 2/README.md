@@ -1,7 +1,5 @@
 # DNS e Aplicações na Internet
 
-O trabalho 2 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%202/trab_2_2021.pdf).
-
 ## Contextualização
 
 Em uma visão macro, segundo J. Kurose, a Internet é uma rede (complexa) composta por interconexões de
@@ -71,3 +69,8 @@ Algumas observações:
 * O protocolo de transporte escolhido foi o TCP, pois a aplicação lê arquivos que estão no servidor e transmite os dados para o cliente e tal protocolo garante a integridade e ordem dos dados. 
 * O cliente se comunica com o servidor sempre a partir do nome do servidor, nunca pelo IP do servidor.
 
+<br>
+
+## Referências
+
+* Texto escrito com base na descrição do trabalho (disponível [aqui](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%202/trab_2_2021.pdf)).
