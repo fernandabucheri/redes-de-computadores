@@ -1,6 +1,6 @@
 # DNS e Aplicações na Internet
 
-O trabalho 2 foi elaborado de acordo com o [solicitado]().
+O trabalho 2 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%202/trab_2_2021.pdf).
 
 ## Contextualização
 

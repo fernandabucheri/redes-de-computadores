@@ -1,6 +1,6 @@
 # Atraso, Vazão/Gargalos, Perdas
 
-O trabalho 1 foi elaborado de acordo com o [solicitado]().
+O trabalho 1 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%201/trab_1_2021.pdf).
 
 O objetivo deste trabalho foi implementar uma rede no emulador _CORE_.
 

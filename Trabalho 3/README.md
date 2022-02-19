@@ -1,6 +1,6 @@
 # Roteamento OSPF
 
-O trabalho 3 foi elaborado de acordo com o [solicitado]().
+O trabalho 3 foi elaborado de acordo com o [solicitado](https://github.com/fernandabucheri/redes-de-computadores/blob/master/Trabalho%203/trabalho_3_roteamento.pdf).
 
 ## Topologia 
 
