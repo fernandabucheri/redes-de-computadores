@@ -25,10 +25,8 @@ intra-AS.
 
 O protocolo DNS _(Domain Name System)_ é um protocolo de Camada de Aplicação cuja função é essencial para qualquer aplicação na Web. Nele, há uma hierarquia definida para gerenciar de forma distribuída os
 nomes na Internet. Considere como exemplo o nome totalmente qualificado (_Fully Qualified Domain Name – FQDN)_:
-
-<center>
-www.google.com.
-</center>
+                                                                
+                                                              www.google.com.
 
 O segmento www no nome significa um sub-domínio/serviço local à organização google, o qual está
 registrado sob o domínio de autoridade .google, que por sua vez está registrado sob o domínio de nível
