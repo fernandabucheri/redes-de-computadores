@@ -1,0 +1,13 @@
+$TTL	60000
+@	IN	SOA	dns.br.	admin.dns.br. (
+	2021121901	; serial
+	30		; refresh
+	15		; retry
+	60000		; expire
+	0		; negative cache ttl
+	)
+@	IN	NS	dns.br.
+dns.br.	IN	A	10.0.2.10
+
+unifesp.br.	IN	NS	dns.unifesp.br.
+dns.unifesp.br.	IN	A	10.0.14.11

@@ -1,0 +1,4 @@
+ifconfig eth0 192.168.9.1/24
+ifconfig eth1 10.0.0.66/30
+ifconfig eth2 10.0.0.62/30
+ifconfig eth3 10.0.0.69/30

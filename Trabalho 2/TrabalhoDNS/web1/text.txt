@@ -1,0 +1,5 @@
+Texto enviado do servidor para o cliente. 
+
+Texto.
+
+Ok.

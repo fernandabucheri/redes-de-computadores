@@ -1,0 +1,1139 @@
+node n4 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-1
+	!
+	interface eth0
+	 ip address 10.0.17.1/24
+	 ipv6 address 2001:17::1/64
+	!
+	interface eth2
+	 ip address 10.0.5.1/24
+	 ipv6 address 2001:5::1/64
+	!
+    }
+    canvas c1
+    iconcoords {131.66666666666666 359.66666666666663}
+    labelcoords {134.66666666666666 389.66666666666663}
+    interface-peer {eth2 n5}
+    interface-peer {eth0 n9}
+}
+
+node n5 {
+    type lanswitch
+    network-config {
+	hostname n5
+	!
+    }
+    canvas c1
+    iconcoords {132.66666666666666 440.0}
+    labelcoords {106.66666666666669 447.0}
+    interface-peer {e0 n4}
+    interface-peer {e2 n7}
+    interface-peer {e1 n6}
+}
+
+node n13 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-13
+	!
+	interface eth1
+	 ip address 10.0.16.2/24
+	 ipv6 address 2001:16::2/64
+	!
+	interface eth0
+	 ip address 10.0.14.1/24
+	 ipv6 address 2001:14::1/64
+	!
+    }
+    canvas c1
+    iconcoords {456.0 519.0}
+    labelcoords {455.0 549.0}
+    interface-peer {eth0 n16}
+    interface-peer {eth1 n9}
+}
+
+node n16 {
+    type lanswitch
+    network-config {
+	hostname n16
+	!
+    }
+    canvas c1
+    iconcoords {455.0 623.0}
+    labelcoords {455.0 647.0}
+    interface-peer {e1 n19}
+    interface-peer {e0 n13}
+    interface-peer {e2 n10}
+}
+
+node n19 {
+    type router
+    model host
+    network-config {
+	hostname web1
+	!
+	interface eth0
+	 ip address 10.0.14.10/24
+	 ipv6 address 2001:14::10/64
+	!
+    }
+    canvas c1
+    iconcoords {344.0 701.0}
+    labelcoords {347.0 740.0}
+    interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', '/root/TrabalhoDNS/web1', )
+	files=('server.c', 'text.txt', 'text2.txt', './startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:./startnamed.sh
+	custom-command ./startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/web1/* /etc/bind/
+	/etc/init.d/named start
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:text2.txt
+	custom-command text2.txt
+	config {
+	file:///root/TrabalhoDNS/web1/text2.txt
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:text.txt
+	custom-command text.txt
+	config {
+	file:///root/TrabalhoDNS/web1/text.txt
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:server.c
+	custom-command server.c
+	config {
+	file:///root/TrabalhoDNS/web1/server.c
+	}
+    }
+}
+
+node n20 {
+    type router
+    model host
+    network-config {
+	hostname DNS-ROOT
+	!
+	interface eth0
+	 ip address 10.0.0.10/24
+	 ipv6 address 2001:0::10/64
+	!
+    }
+    canvas c1
+    iconcoords {106.0 275.0}
+    labelcoords {106.0 307.0}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-root/* /etc/bind/
+	/etc/init.d/named start
+	}
+    }
+    services {DefaultRoute UserDefined}
+    interface-peer {eth0 n17}
+}
+
+node n10 {
+    type router
+    model host
+    network-config {
+	hostname DNS-A-1
+	!
+	interface eth0
+	 ip address 10.0.14.11/24
+	 ipv6 address 2001:14::11/64
+	!
+    }
+    canvas c1
+    iconcoords {582.0 706.0}
+    labelcoords {576.0 742.0}
+    interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-a-1/* /etc/bind/
+	/etc/init.d/named start
+	
+	}
+    }
+}
+
+node n1 {
+    type router
+    model host
+    network-config {
+	hostname DNS-TLD-1
+	!
+	interface eth0
+	 ip address 10.0.2.10/24
+	 ipv6 address 2001:2::10/64
+	!
+    }
+    canvas c1
+    iconcoords {1277.0 255.0}
+    labelcoords {1277.0 287.0}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-tld-1/* /etc/bind/
+	/etc/init.d/named start
+	}
+    }
+    interface-peer {eth0 n21}
+}
+
+node n11 {
+    type router
+    model host
+    network-config {
+	hostname DNS-TLD-2
+	!
+	interface eth0
+	 ip address 10.0.4.10/24
+	 ipv6 address 2001:4::10/64
+	!
+    }
+    canvas c1
+    iconcoords {1023.0 249.0}
+    labelcoords {1023.0 285.0}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-tld-2/* /etc/bind/
+	/etc/init.d/named start
+	
+	}
+    }
+    services {DefaultRoute UserDefined}
+    interface-peer {eth0 n22}
+}
+
+node n7 {
+    type router
+    model host
+    network-config {
+	hostname DNS-LOCAL
+	!
+	interface eth0
+	 ip address 10.0.5.10/24
+	 ipv6 address 2001:5::10/64
+	!
+    }
+    canvas c1
+    iconcoords {211.33333333333334 560.6666666666666}
+    labelcoords {211.33333333333334 592.6666666666667}
+    interface-peer {eth0 n5}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/log', '/var/run/named', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-local/* /etc/bind/
+	/etc/init.d/named start
+	}
+    }
+    services {DefaultRoute UserDefined}
+}
+
+node n8 {
+    type router
+    model host
+    network-config {
+	hostname DNS-A-2
+	!
+	interface eth0
+	 ip address 10.0.10.10/24
+	 ipv6 address 2001:10::10/64
+	!
+    }
+    canvas c1
+    iconcoords {935.0 703.0}
+    labelcoords {928.0 738.0}
+    interface-peer {eth0 n14}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc/bind', '/run/named', '/var/cache/bind', '/var/lib/bind', '/var/run/named', '/var/log', )
+	files=('/startnamed.sh', )
+	cmdup=('bash startnamed.sh', )
+	cmddown=('/etc/init.d/named stop', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/startnamed.sh
+	custom-command /startnamed.sh
+	config {
+	cp /root/TrabalhoDNS/dns-a-2/* /etc/bind/
+	/etc/init.d/named start
+	}
+    }
+}
+
+node n12 {
+    type router
+    model host
+    network-config {
+	hostname web2
+	!
+	interface eth0
+	 ip address 10.0.10.11/24
+	 ipv6 address 2001:10::11/64
+	!
+    }
+    canvas c1
+    iconcoords {724.0 705.0}
+    labelcoords {724.0 740.0}
+    interface-peer {eth0 n14}
+}
+
+node n14 {
+    type lanswitch
+    network-config {
+	hostname n14
+	!
+    }
+    canvas c1
+    iconcoords {785.0 615.0}
+    labelcoords {785.0 639.0}
+    interface-peer {e0 n15}
+    interface-peer {e1 n8}
+    interface-peer {e2 n12}
+}
+
+node n15 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-12
+	!
+	interface eth0
+	 ip address 10.0.9.2/24
+	 ipv6 address 2001:9::2/64
+	!
+	interface eth1
+	 ip address 10.0.10.1/24
+	 ipv6 address 2001:10::1/64
+	!
+    }
+    canvas c1
+    iconcoords {784.0 521.0}
+    labelcoords {784.0 552.0}
+    interface-peer {eth1 n14}
+    interface-peer {eth0 n26}
+}
+
+node n6 {
+    type router
+    model PC
+    network-config {
+	hostname cliente
+	!
+	interface eth0
+	 ip address 10.0.5.20/24
+	 ipv6 address 2001:5::20/64
+	!
+    }
+    canvas c1
+    iconcoords {60.0 527.6666666666667}
+    labelcoords {61.0 564.6666666666666}
+    interface-peer {eth0 n5}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/etc', )
+	files=('/etc/resolv.conf', 'client.c', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:client.c
+	custom-command client.c
+	config {
+	file:///root/TrabalhoDNS/cliente/client.c
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:/etc/resolv.conf
+	custom-command /etc/resolv.conf
+	config {
+	nameserver 10.0.5.10
+	}
+    }
+}
+
+node n17 {
+    type lanswitch
+    network-config {
+	hostname n17
+	!
+    }
+    canvas c1
+    iconcoords {188.0 190.0}
+    labelcoords {188.0 214.0}
+    interface-peer {e0 n20}
+    interface-peer {e1 n18}
+}
+
+node n21 {
+    type lanswitch
+    network-config {
+	hostname n21
+	!
+    }
+    canvas c1
+    iconcoords {1184.0 194.0}
+    labelcoords {1186.0 224.0}
+    interface-peer {e2 n1}
+    interface-peer {e0 n23}
+}
+
+node n22 {
+    type lanswitch
+    network-config {
+	hostname n22
+	!
+    }
+    canvas c1
+    iconcoords {1088.0 192.0}
+    labelcoords {1088.0 216.0}
+    interface-peer {e2 n11}
+    interface-peer {e0 n24}
+}
+
+node n23 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-11
+	!
+	interface eth0
+	 ip address 10.0.12.2/24
+	 ipv6 address 2001:12::2/64
+	!
+	interface eth1
+	 ip address 10.0.2.1/24
+	 ipv6 address 2001:2::1/64
+	!
+    }
+    canvas c1
+    iconcoords {1293.0 166.0}
+    labelcoords {1296.0 196.0}
+    interface-peer {eth1 n21}
+    interface-peer {eth0 n27}
+}
+
+node n24 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-10
+	!
+	interface eth0
+	 ip address 10.0.8.2/24
+	 ipv6 address 2001:8::2/64
+	!
+	interface eth1
+	 ip address 10.0.4.1/24
+	 ipv6 address 2001:4::1/64
+	!
+    }
+    canvas c1
+    iconcoords {968.0 167.0}
+    labelcoords {970.0 200.0}
+    interface-peer {eth1 n22}
+    interface-peer {eth0 n27}
+}
+
+node n25 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-8
+	!
+	interface eth2
+	 ip address 10.0.7.1/24
+	 ipv6 address 2001:7::1/64
+	!
+	interface eth0
+	 ip address 10.0.3.1/24
+	 ipv6 address 2001:3::1/64
+	!
+	interface eth1
+	 ip address 10.0.15.2/24
+	 ipv6 address 2001:15::2/64
+	!
+    }
+    canvas c1
+    iconcoords {50.0 29.0}
+    labelcoords {52.0 17.0}
+    interface-peer {eth1 n27}
+    interface-peer {eth0 n29}
+    interface-peer {eth2 n18}
+}
+
+node n27 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-7
+	!
+	interface eth3
+	 ip address 10.0.12.1/24
+	 ipv6 address 2001:12::1/64
+	!
+	interface eth0
+	 ip address 10.0.6.1/24
+	 ipv6 address 2001:6::1/64
+	!
+	interface eth2
+	 ip address 10.0.8.1/24
+	 ipv6 address 2001:8::1/64
+	!
+	interface eth1
+	 ip address 10.0.15.1/24
+	 ipv6 address 2001:15::1/64
+	!
+    }
+    canvas c1
+    iconcoords {1129.0 30.0}
+    labelcoords {1130.0 20.0}
+    interface-peer {eth1 n25}
+    interface-peer {eth2 n24}
+    interface-peer {eth0 n29}
+    interface-peer {eth3 n23}
+}
+
+node n18 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-9
+	!
+	interface eth0
+	 ip address 10.0.7.2/24
+	 ipv6 address 2001:7::2/64
+	!
+	interface eth1
+	 ip address 10.0.0.1/24
+	 ipv6 address 2001:0::1/64
+	!
+    }
+    canvas c1
+    iconcoords {50.0 191.0}
+    labelcoords {50.0 223.0}
+    interface-peer {eth1 n17}
+    interface-peer {eth0 n25}
+}
+
+node n29 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-6
+	!
+	interface eth3
+	 ip address 10.0.1.1/24
+	 ipv6 address 2001:1::1/64
+	!
+	interface eth1
+	 ip address 10.0.6.2/24
+	 ipv6 address 2001:6::2/64
+	!
+	interface eth0
+	 ip address 10.0.3.2/24
+	 ipv6 address 2001:3::2/64
+	!
+	interface eth2
+	 ip address 10.0.19.1/24
+	 ipv6 address 2001:19::1/64
+	!
+    }
+    canvas c1
+    iconcoords {613.0 105.0}
+    labelcoords {613.0 89.0}
+    interface-peer {eth2 n2}
+    interface-peer {eth0 n25}
+    interface-peer {eth1 n27}
+    interface-peer {eth3 n3}
+}
+
+node n2 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-3
+	!
+	interface eth1
+	 ip address 10.0.11.1/24
+	 ipv6 address 2001:11::1/64
+	!
+	interface eth2
+	 ip address 10.0.19.2/24
+	 ipv6 address 2001:19::2/64
+	!
+    }
+    canvas c1
+    iconcoords {456.0 206.0}
+    labelcoords {453.0 239.0}
+    interface-peer {eth2 n29}
+    interface-peer {eth1 n9}
+}
+
+node n9 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-2
+	!
+	interface eth3
+	 ip address 10.0.17.2/24
+	 ipv6 address 2001:17::2/64
+	!
+	interface eth2
+	 ip address 10.0.16.1/24
+	 ipv6 address 2001:16::1/64
+	!
+	interface eth0
+	 ip address 10.0.11.2/24
+	 ipv6 address 2001:11::2/64
+	!
+    }
+    canvas c1
+    iconcoords {456.0 359.0}
+    labelcoords {456.0 391.0}
+    interface-peer {eth0 n2}
+    interface-peer {eth2 n13}
+    interface-peer {eth3 n4}
+}
+
+node n26 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-4
+	!
+	interface eth0
+	 ip address 10.0.13.1/24
+	 ipv6 address 2001:13::1/64
+	!
+	interface eth3
+	 ip address 10.0.9.1/24
+	 ipv6 address 2001:9::1/64
+	!
+    }
+    canvas c1
+    iconcoords {783.0 354.0}
+    labelcoords {783.0 343.0}
+    interface-peer {eth3 n15}
+    interface-peer {eth0 n3}
+}
+
+node n3 {
+    type router
+    model router
+    network-config {
+	hostname ROUTER-5
+	!
+	interface eth0
+	 ip address 10.0.1.2/24
+	 ipv6 address 2001:1::2/64
+	!
+	interface eth1
+	 ip address 10.0.13.2/24
+	 ipv6 address 2001:13::2/64
+	!
+    }
+    canvas c1
+    iconcoords {782.0 207.0}
+    labelcoords {782.0 238.0}
+    interface-peer {eth1 n26}
+    interface-peer {eth0 n29}
+}
+
+link l6 {
+    nodes {n4 n5}
+    bandwidth 0
+}
+
+link l21 {
+    nodes {n16 n19}
+    bandwidth 0
+}
+
+link l11 {
+    nodes {n13 n16}
+    bandwidth 0
+}
+
+link l12 {
+    nodes {n16 n10}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n5 n7}
+    bandwidth 0
+}
+
+link l15 {
+    nodes {n15 n14}
+    bandwidth 0
+}
+
+link l16 {
+    nodes {n14 n8}
+    bandwidth 0
+}
+
+link l17 {
+    nodes {n14 n12}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n6 n5}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n20 n17}
+    bandwidth 0
+}
+
+link l20 {
+    nodes {n21 n1}
+    bandwidth 0
+}
+
+link l22 {
+    nodes {n22 n11}
+    bandwidth 0
+}
+
+link l23 {
+    nodes {n23 n21}
+    bandwidth 0
+}
+
+link l24 {
+    nodes {n24 n22}
+    bandwidth 0
+}
+
+link l28 {
+    nodes {n27 n25}
+    bandwidth 0
+}
+
+link l13 {
+    nodes {n18 n17}
+    bandwidth 0
+}
+
+link l27 {
+    nodes {n29 n2}
+    bandwidth 0
+}
+
+link l10 {
+    nodes {n27 n24}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n25 n29}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n27 n29}
+    bandwidth 0
+}
+
+link l9 {
+    nodes {n2 n9}
+    bandwidth 0
+}
+
+link l14 {
+    nodes {n26 n15}
+    bandwidth 0
+}
+
+link l25 {
+    nodes {n9 n13}
+    bandwidth 0
+}
+
+link l26 {
+    nodes {n4 n9}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n25 n18}
+    bandwidth 0
+}
+
+link l19 {
+    nodes {n26 n3}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n29 n3}
+    bandwidth 0
+}
+
+link l18 {
+    nodes {n27 n23}
+    bandwidth 0
+}
+
+annotation a3 {
+    type text
+    iconcoords {580.0 41.0}
+    label {}
+    canvas c1
+}
+
+annotation a5 {
+    type text
+    iconcoords {597.0 398.0}
+    label {}
+    canvas c1
+}
+
+annotation a10 {
+    type text
+    iconcoords {254.0 432.0}
+    label {}
+    canvas c1
+}
+
+annotation a4 {
+    type text
+    iconcoords {630.0 206.0}
+    label {}
+    canvas c1
+}
+
+annotation a9 {
+    type text
+    iconcoords {628.0 206.0}
+    label {}
+    canvas c1
+}
+
+annotation a2 {
+    iconcoords {319 491 637 743}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #96e4ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a13 {
+    iconcoords {965.0 250.0}
+    type text
+    label {.com}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a14 {
+    iconcoords {684.0 490.0 984.0 743.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #99e4ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a1 {
+    iconcoords {488.0 590.0}
+    type text
+    label {www.unifesp.br}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a11 {
+    type text
+    iconcoords {1138.0 317.0}
+    label {}
+    canvas c1
+}
+
+annotation a15 {
+    iconcoords {846.0 588.0}
+    type text
+    label {www.google.com}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a16 {
+    type text
+    iconcoords {531.0 488.0}
+    label {}
+    canvas c1
+}
+
+annotation a7 {
+    iconcoords {1158.0 134.0 1332.0 288.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #ccf9c3
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a17 {
+    iconcoords {933.0 133.0 1127.0 285.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #ccf9c0
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a8 {
+    iconcoords {28.0 327.0 257.0 595.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #23e398
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a19 {
+    iconcoords {4.0 8.0 1228.0 127.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #c0c0ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a26 {
+    type text
+    iconcoords {-34.0 -20.0}
+    label {}
+    canvas c1
+}
+
+annotation a27 {
+    type text
+    iconcoords {-3.0 -10.0}
+    label {}
+    canvas c1
+}
+
+annotation a6 {
+    iconcoords {18.0 144.0 230.0 311.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #f4beff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a18 {
+    iconcoords {319 165 575 383}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #c0c0ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a20 {
+    type text
+    iconcoords {98.0 150.0}
+    label {}
+    canvas c1
+}
+
+annotation a12 {
+    iconcoords {1291.0 254.0}
+    type text
+    label {.br}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a21 {
+    type text
+    iconcoords {107.0 15.0}
+    label {}
+    canvas c1
+}
+
+annotation a22 {
+    iconcoords {638 165 907 385}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #C0C0FF
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+canvas c1 {
+    name {Canvas1}
+    refpt {0 0 47.5791667 -122.132322 2.0}
+    scale {150.0}
+    size {1333 750}
+}
+
+option global {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    show_api no
+    background_images no
+    annotations yes
+    grid yes
+    traffic_start 0
+}
+
+option session {
+}
+
